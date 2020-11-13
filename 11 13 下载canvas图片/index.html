@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>canvas图片下载</title>
+    <style>
+        img{
+            width: 100px;
+        }
+        #box{
+            width: 100px;
+            background: skyblue;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="myCanvas" width="300" height="300"></canvas>
+    <img id="myImg" src="" alt="">
+    <img id="image" src="" alt="">
+    <button id="btn1">下载图片1</button>
+    <button id="btn2">下载图片2</button>
+    <a href="./images/yugioh.jpg" download="yugioh">下载yugioh</a>
+    <div id="box">点击就哭</div>
+    <script>
+        let myCanvas=document.getElementById('myCanvas')
+        let myImg=document.getElementById('myImg')
+        let image=document.getElementById('image')
+        let btn=document.getElementById('btn')
+        let ctx=myCanvas.getContext('2d')
+        console.log(ctx);
+        ctx.beginPath()
+        ctx.moveTo(0,150)
+        ctx.lineTo(150,0)
+        ctx.lineTo(150,300)
+        ctx.fill()
+        ctx.closePath()
+        //1.导出canvas画布为base64格式
+        //（1）canvas元素的HTMLCanvasElement.toDataURL()
+        let dataURL=myCanvas.toDataURL()
+        myImg.src=dataURL
+        //（2）canvas元素的HTMLCanvasElement.toBlob()
+        let url=null
+        myCanvas.toBlob(function(blob){
+            url=URL.createObjectURL(blob)
+            console.log(blob);
+            image.src=url
+        })
+        //下载成图片文件
+        /*
+         *原理：利用a标签的download属性，点击时会下载
+         *      
+         * 
+         * 
+         * 
+         */
+        function downloadFile(url,name='image'){
+                var a = document.createElement("a")
+                a.setAttribute("href",url)
+                a.setAttribute("download",name)
+                a.setAttribute("target","_blank")
+                // let clickEvent = document.createEvent("MouseEvents");
+                // clickEvent.initEvent("click", true, true);  
+                // a.dispatchEvent(clickEvent);
+                // let event=new MouseEvent('click')
+                // a.dispatchEvent(event)
+                a.click()
+            }
+        btn1.onclick=function(){
+            downloadFile(dataURL,'三角形1')
+        }
+        btn2.onclick=function(){
+            downloadFile(url)
+        }
+
+        let box=document.getElementById('box')
+        box.onclick=function(){
+            console.log('呜呜呜呜');
+        }
+        let newEvent=document.createEvent('MouseEvents')
+        newEvent.initEvent('click')
+        box.dispatchEvent(newEvent)
+    </script>
+</body>
+</html>

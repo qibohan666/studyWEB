@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jq</title>
+
+</head>
+<body>
+    <div id="box">
+        <div class="first">first</div>
+        <div class="line">line</div>
+    </div>
+    <div class="line">line3</div>
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+</body>
+<script>
+    let p="<p>我是ppp</p>"
+    $('.first').after(p)
+    console.log($('#box').find('.line'));
+    console.log($('#box').find('.line')[0]);
+    let a='11111'
+    $('#box').prepend(a)
+</script>
+</html>

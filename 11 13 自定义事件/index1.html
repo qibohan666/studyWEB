@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>index1</title>
+    <style>
+        #box1{
+            width: 100px;
+            background: skyblue;
+        }
+        #box2{
+            width: 100px;
+            background: greenyellow;
+        }
+    </style>
+</head>
+<body>
+    <button id="btn">按钮</button>
+    <a href="http://www.baidu.com">去百度</a>
+    <div id="box1">点击就哭</div>
+    <div id="box2">点击就笑</div>
+</body>
+<script>
+    //1.这种创建方式是比较过时的创建方式，不久便会废弃
+        let box1=document.getElementById('box1')
+        //1.创建自定义事件
+        let newEvent=document.createEvent('MouseEvents')
+        //2.初始化自定义事件
+        newEvent.initEvent('fuck',true,true)
+        //3.绑定or监听自定义事件
+        box1.addEventListener('fuck',function(){
+            console.log('我被fuck了');
+        })
+        console.log(newEvent);
+        //4.手动触发自定义事件
+        box1.dispatchEvent(newEvent)
+    //2.最新的创建自定义事件的方式
+        let box2=document.getElementById('box2')
+        let event=new CustomEvent('smile',{detail:{hero:'天空侠'}})
+        box2.addEventListener('smile',function(e){
+            console.log('让我一直笑吗?:',e);
+        })
+        box2.dispatchEvent(event)
+    //脚本触发btn点击事件
+        let btn=document.getElementById('btn')
+        let myA=document.getElementsByTagName('a')[0]
+        let clickEvent=new CustomEvent('click')
+        btn.onclick=function(){
+            console.log('点击');
+        }
+        
+        btn.dispatchEvent(clickEvent)
+        myA.dispatchEvent(clickEvent)
+    //基本触发a标签点击事件并实现跳转效果
+    
+    
+</script>
+</html>

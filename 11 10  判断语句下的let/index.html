@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>11 10  判断语句下的let</title>
+</head>
+<body>
+    <script>
+        let a=true
+        if(a){
+            var k='kkk'
+        }else{
+            var p='ppp'
+        }
+        console.log(k);
+        //var 声明的无块级作用域，if语句中声明视为全局变量
+        if(a){
+            let f='fff'
+        }else{
+            let h='hhh'
+        }
+        console.log(f);
+        //let 声明的有块级作用域，if语句声明的视为私有变量
+        
+    </script>
+</body>
+</html>

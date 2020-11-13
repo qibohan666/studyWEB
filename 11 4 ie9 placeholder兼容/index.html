@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #box{
+            width: 500px;
+            height: 500px;
+            background: red;
+            overflow-y: auto;
+        }
+        .content{
+            width: 400px;
+            height: 300px;
+            background: green;
+        }
+        .warpper{
+            height: 30px;
+            width: 30px;
+            border: 1px solid black;
+            text-align: center;
+            line-height: 32px;
+        }
+        ul li:nth-child(2){
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <input type="text" placeholder="请输入姓名">
+    <input type="password" placeholder="请输入密码">
+    <div id="box">
+        <div class="content" onClick="fn()">
+        </div>
+    </div>
+    <div class="warpper">+</div>
+    <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+    </ul>
+    <script src="../11 4 ie9 placeholder兼容/placeholderIE9.js"></script>
+    <script>
+        function fn(){
+            console.log('ffff');
+        }
+        var result={
+            data:{
+                'point_type_name':0,
+                'point_type_id':0,
+                'sign':0,
+                'point':0,
+                'type':0
+            }
+        }
+        var str_one = '<li class="toolbarTree1Li"><div class="firstMenu"><span class="subtraction" onClick="subtraction(this)" data-number="1">+</span><span style="margin-left: 20px"><span style="color:#999;">200</span>&nbsp;&nbsp;' + result.data.point_type_name + '</span><div style="margin-left: 20px" class="firstOperation"><span class="cursor firstEdit" onClick="edit(this)" data-id="' + result.data.point_type_id + '" data-name="' + result.data.point_type_name + '" data-sign="' + result.data.sign + '" data-point="' + result.data.point + '" data-type="' + result.data.type + '"><img class="img" src="assets/store/img/jpg/bianji.png"></span><span class="cursor j-add" onClick="add(this)"  data-level="1" data-fid=" 200" "=""><img class=" img" src="assets/store/img/jpg/add.png"></span></div></div><div class="lineLeft"></div></li>';
+        var x=100
+        var s=' <div class="content" onClick="fn()">'+x+'</div>'
+        console.log(s);
+        var box=document.getElementsByClassName('content')[0]
+        console.log(box);
+        box.innerHTML=str_one
+    </script>
+</body>
+</html>

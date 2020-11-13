@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>图片懒加载</title>
+    <style>
+        .main{
+            width: 50px;
+        }
+        .box{
+            background: red;
+            width: 100px;
+            position: absolute;
+            bottom: -200px;
+        }
+        img{
+            display: block;
+            width: 400px;
+            margin: 200px;
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <div class="box">box</div>
+        <img src="#" data-src="../10 30 节流 防抖/imgs/1.jpg" alt="">
+        <img src="#" data-src="../10 30 节流 防抖/imgs/2.jpg" alt="">
+        <img src="#" data-src="../10 30 节流 防抖/imgs/3.jpg" alt="">
+        <img src="#" data-src="../10 30 节流 防抖/imgs/4.jpg" alt="">
+        <img src="#" data-src="../10 30 节流 防抖/imgs/5.jpg" alt="">
+        <img src="#" data-src="../10 30 节流 防抖/imgs/6.jpg" alt="">
+        <img src="#" data-src="../10 30 节流 防抖/imgs/7.jpg" alt="">
+    </div>
+    <script>
+        
+        // for(let i=0;i<100;i++){
+        //     document.write(i+'<br/>')
+        // }
+        //需要对scroll进行节流处理
+        function throttle2(fn,delay){
+            let timer;
+            return function(){
+                let _this=this,arg=arguments;
+                if(timer) return
+                timer=setTimeout(() => {
+                    fn.apply(_this,arg)
+                    timer=null
+                }, delay);
+            }
+        }
+        let imgs=document.getElementsByTagName('img')
+        //判断元素是否出现在视图中
+        function isShow(el){
+            let H=document.documentElement.clientHeight
+            let scrollTop=document.body.scrollTop || document.documentElement.scrollTop; 
+            if(el.offsetTop<H+scrollTop){
+                return true
+            }else{
+                return false
+            }
+
+        }
+        //出现在视图就替换掉src
+        function replaceSrc(){
+            for(let i=0;i<imgs.length;i++){
+                if(isShow(imgs[i])){
+                    console.log('show:'+i);
+                    imgs[i].src=imgs[i].getAttribute('data-src')
+                }else{
+                    console.log('hide:'+i);
+                }
+            }
+        }
+        window.onscroll=throttle2(replaceSrc,500)
+        window.onload=function(){
+            replaceSrc()
+        }
+       
+    </script>
+</body>
+</html>

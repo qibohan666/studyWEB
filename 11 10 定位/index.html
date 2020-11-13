@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>定位</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            display: flex;
+        }
+        .box{
+            width: 200px;
+            height: 200px;
+            background: red;
+            position: relative;
+            margin: 20px;
+        }
+        .inner1{
+            width: 100px;
+            height: 100px;
+            background: green;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        .inner2{
+            width: 100px;
+            height: 100px;
+            background: pink;
+            position: fixed;
+            top: 0;
+            left: 0;
+        }
+        .inner2 p{
+            background: #666;
+            position: fixed;
+            top: 0;
+        }
+        .inner3{
+            width: 100px;
+            height: 100px;
+            background: blue;
+            position: relative;
+            top: 0;
+            left: 0;
+        }
+        .inner4{
+            width: 100px;
+            height: 100px;
+            background: orange;
+            position: static;
+            top: 0;
+            left: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <div class="inner1"></div>
+    </div>
+    <div class="box">
+        <div class="inner2">
+            <p>pppp</p>
+        </div>
+    </div>
+    <div class="box">
+        <div class="inner3"></div>
+    </div>
+    <div class="box">
+        <div class="inner4"></div>
+    </div>
+    <script>
+        //
+    </script>
+</body>
+</html>
