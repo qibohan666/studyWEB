@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+        <title>表单提交验证</title>
+        <link rel="stylesheet" href="http://cdn.staticfile.org/amazeui/1.0.0-rc1/css/amazeui.css">
+    </head>
+    <body>
+        <form id="form2" class="am-form am-form-horizontal">
+            <div id="panel2" style="margin-top:5px">
+                <div class="am-form-group am-u-sm-12" style="margin-top:5px">
+                    <div class="am-u-sm-6">
+                        <label class="am-u-sm-4 am-form-label"><span style="color: #ff0000;">*</span>姓名:</label>
+                        <div class="am-u-sm-8">
+                            <!-- 验证非空 -->
+                            <input id="deptname" class="am-form-field" maxlength=10 placeholder="姓名" style="width:300px" pattern="^[\s\S]*.*[^\s][\s\S]*$"
+                             data-validation-message="姓名" required></input>
+                        </div>
+                    </div>
+                </div>
+                <div class="am-form-group am-u-sm-12" style="margin-top:5px">
+                    <div class="am-u-sm-6">
+                        <label class="am-u-sm-4 am-form-label"><span style="color: #ff0000;">*</span>年龄:</label>
+                        <div class="am-u-sm-8">
+                            <!-- 验证为正整数 -->
+                            <input id="sortid" class="am-form-field" placeholder="请输入正整数" pattern="^0$|^\+?[1-9]\d*$" maxlength="9" style="width: 300px"
+                             data-validation-message="年龄" required></input>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-actions" style=" padding-top:1%;text-align: center;">
+                    <button type="submit" class="am-btn am-btn-warning">保存</button>
+                </div>
+        </form>
+        <script src="./jquery.min.js"></script>
+        <script src="./jquery.form.js"></script>
+        <script src="http://cdn.staticfile.org/amazeui/1.0.0-rc1/js/amazeui.js"></script>
+        <script type="text/javascript">
+            //验证提醒
+            $(function() {
+                $('#form2').validator({ //表单验证初始化
+                    onValid: function(validity) {
+                        $(validity.field).closest('.am-form-group').find('.am-alert').hide();
+                    },
+                    onInValid: function(validity) {
+                        var $field = $(validity.field);
+                        var $group = $field.closest('.am-form-group');//提示语将追加在此类后
+                        var $alert = $group.find('.am-alert');
+                        // 使用自定义的提示信息 或 插件内置的提示信息
+                        var msg = $field.data('validationMessage') || this.getValidationMessage(validity);
+
+                        if (!$alert.length) {
+                            $alert = $('<div class="am-alert am-alert-danger am-u-sm-8"></div>').hide().appendTo($group);
+                        }
+                        $alert.html(msg).show();
+                    },
+                    submit: function() {
+                        formValidity = this.isFormValid();
+
+                        if (formValidity) {
+                            //输入框校验
+                            if ($('#deptname').val() == "1") { //二次验证
+                                alert('请正确填写姓名！');
+                                return;
+                            }
+                            alert('保存成功');
+                        }
+                    }
+                });
+            });
+        </script>
+        
+    </body>
+</html>

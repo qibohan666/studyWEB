@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box{
+            font:bold  12px KaiTi;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">王喷</div>
+    <script>
+    const infohandle=function(str){
+    let handleAry=str.match(/\d+/g)
+    let phone=handleAry[0]
+    let phoneAry=phone.split('')
+    phoneAry.splice(3,4,'****')
+    let newPhone=phoneAry.join('')
+    let num=handleAry[1]
+    return {
+        phone:newPhone,
+        num:num
+    }
+}
+let str='邀请【19931249134】成为合伙人，获得300积分'
+console.log(infohandle(str));
+    </script>
+</body>
+</html>

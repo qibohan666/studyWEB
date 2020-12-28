@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>对象的数据双向绑定</title>
+</head>
+<body>
+    <input class="inp" type="text">
+    <div class="box"></div>
+    <script>
+        let my={
+            name:'qbh',
+            age:18,
+            num:100,
+            ary:[1,2,3,4]
+        }
+        function observer(obj){
+            if(typeof obj=='object'&&obj!=null){
+                for (let key in obj) {
+                    let value=obj[key]
+                    Object.defineProperty(obj,key,{
+                        get(){
+                            console.log('获取');
+                            return value
+                        },
+                        set(newVal){
+                            // render(newVal)
+                            renderList(newVal)
+                            value=newVal
+                        }
+                    })
+                }
+            }
+        }
+        observer(my)
+        let inp=document.getElementsByClassName('inp')[0]
+        function render(inner) {
+            inp.value=inner
+        }
+        render(my.num)
+        inp.onchange=function(e){
+            my.num=e.target.value
+        }
+
+        let box=document.getElementsByClassName('box')[0]
+        function renderList(ary){
+            box.innerHTML=null
+            ary.forEach(item => {
+                let Odiv=document.createElement('div')
+                Odiv.innerHTML=item
+                box.append(Odiv)
+            });
+        }
+        renderList(my.ary)
+    </script>
+</body>
+</html>

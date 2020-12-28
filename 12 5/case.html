@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let str1="升级回收，扣除10000积分"
+        let str2="邀请【13644778855】成为服务机构，获得积分1000"
+        let str3="开通节点，获得10000积分"
+       function fn(str){
+        let numAry=str.match(/\d+/g)
+        let strAry=str.split(/\d+/g)
+        let leftstr,num,rightstr;
+        // console.log(numAry,strAry);
+        if(numAry.length==1){
+            leftstr=strAry[0]
+            num=numAry[0]
+            rightstr=strAry[1]
+        }else if(numAry.length==2){
+            let phoneAry=numAry[0].split('')
+            phoneAry.splice(3,4,'****')
+            let phone=phoneAry.join('')
+            // console.log(phone);
+            leftstr=strAry[0]+phone+strAry[1]
+            num=numAry[1]
+            rightstr=strAry[2]
+        }
+        if(rightstr==null){
+            rightstr=''
+        }
+        console.log(leftstr,num,rightstr)
+        console.log(leftstr+num+rightstr);
+       }
+       fn(str1)
+       fn(str2)
+       fn(str3)
+    </script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input id="inp" type="text" value="666" placeholder="9999">
+    <input type="submit">
+    <script src="./placeholderIE.js"></script>
+    <script>
+        var inp=document.getElementById('inp')
+        var val=inp.value
+        console.log(val.length)
+    </script>
+    <script>
+        if(!(navigator.appName == "Microsoft Internet Explorer"&&parseInt(navigator.appVersion.split(";")[1].replace(/[ ]/g, "").replace("MSIE",""))<=9)){
+        // console.log("您的浏览器版本过低，请使用IE9及以上版本");
+        console.log('您是现代浏览器');
+    }
+    </script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数组的数据双向绑定</title>
+</head>
+<body>
+    <div class="box"></div>
+    <script>
+        //数组不支持Object.defineProperty,采用重写数组方法的方式,并进行原型重定向
+        //能够改变原数组的方法一共有7种，'push','pop','shift','unshift','splice','sort','reverse'
+        let arrayProto=Array.prototype
+        //数组原型浅克隆
+        let arrayMethods=Object.create(arrayProto)
+        let ary=['push','pop','shift','unshift','splice','sort','reverse']
+        ary.forEach(item=>{
+            Object.defineProperty(arrayMethods,item,{
+                value(e){
+                    let result=arrayProto[item].apply(this,arguments)
+                    renderList(this)
+                    return result
+                }
+            })
+        })
+        let arr=[1,2,3]
+        arr.__proto__=arrayMethods
+        let box=document.getElementsByClassName('box')[0]
+        function renderList(ary){
+            box.innerHTML=null
+            console.log(ary);
+            ary.forEach(item=>{
+                let div=document.createElement('div')
+                div.innerHTML=item
+                box.appendChild(div)
+            })
+        }
+        renderList(arr)
+    </script>
+</body>
+</html>
